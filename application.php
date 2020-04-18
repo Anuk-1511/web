@@ -26,12 +26,12 @@
           <input type="text" class="input">
        </div>  
        <div class="inputfield">
-          <label>Password</label>
-          <input type="password" class="input">
+          <label>Father's Name</label>
+          <input type="text" class="input">
        </div>  
       <div class="inputfield">
-          <label>Confirm Password</label>
-          <input type="password" class="input">
+          <label>Mother's info</label>
+          <input type="text" class="input">
        </div> 
         <div class="inputfield">
           <label>Gender</label>
