@@ -67,7 +67,9 @@
           <p>Agreed to terms and conditions</p>
        </div> 
       <div class="inputfield">
+        <form action="eduinfo.php">
         <input type="submit" value="Now Educational Info" class="btn">
+        </form>
       </div>
     </div>
 </div>	
