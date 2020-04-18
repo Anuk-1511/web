@@ -18,9 +18,13 @@
                 <input type ="email" placeholder="Email" class="txt" name="Email">
                 <input type ="password" placeholder="Password" class="txt" name="Password">
                 <input type ="password" placeholder="Confirm Password" class="txt" name="Confirm Password">
-                <!-- <input type ="button" value="Sign In" class="btn" name="btn"> -->
-                <a class="btn1" input type="button" value="Sign In" href="http://new.local/login.php" >Sign In</a>
-                <a class="btn2" input type="button" value="Sign In" href="http://new.local/signup.php", target="_blank">Sign Up</a>
+                <form action="index.php">
+                <input type="submit" value="Sign In" class="btn1">
+                </form>
+                <form action="signup.php">
+                <input type="submit" value="Sign Up" class="btn2">
+                </form>
+                
                 <a href="#">Already Have a Account</a>
             </form>
         </div>
