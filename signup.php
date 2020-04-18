@@ -16,8 +16,9 @@
           <input type="password" name="password" placeholder="Password"/>
         
           <input type="password" name="password2" placeholder="Retype password"/>
-          <a class="btn"input type="button" name="signup-button" value="Sign Up" href="http://new.local/application.php", target="_blank">Sign Up</a>
-        
+          <form action="/application.php">
+          <input type="submit" name="signup-button" value="Sign up" href="http://new.local/application.php", target="_blank">
+          </form>
         </div>
         <div class="right-box">
           <span class="signinwith">Sign in with<br/>Social Network     </span>
