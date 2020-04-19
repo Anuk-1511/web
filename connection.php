@@ -1,10 +1,18 @@
+<html lang = en>
 <?php 
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $db = "entry_details";
     
-    $con = mysqli_connect('localhost','root','','website1');
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $db);
 
-    if(!$con)
-    {
-        echo 'Please Check Your Database Connection';
-    }    
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    echo "Connected successfully";
+   
 
 ?>
