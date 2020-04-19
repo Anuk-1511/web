@@ -51,6 +51,22 @@
           <label>Phone Number</label>
           <input type="text" class="input">
        </div> 
+       <div class="inputfield">
+          <label>Date of Birth</label>
+          <input type="text" class="input">
+       </div>
+       <div class="inputfield">
+          <label>Marital Status</label>
+          <div class="custom_select">
+            <select>
+              <option value="">Select</option>
+              <option value="male">Single</option>
+              <option value="female">Married</option>
+              <option value="female">Widowed</option>
+              <option value="female">Divorced</option>
+            </select>
+          </div>
+       </div> 
       <div class="inputfield">
           <label>Address</label>
           <textarea class="textarea"></textarea>
