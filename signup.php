@@ -16,7 +16,7 @@
           <input type="password" name="password" placeholder="Password"/>
         
           <input type="password" name="password2" placeholder="Retype password"/>
-          <form action="/application.php">
+          <form action="application.php">
           <input type="submit" name="signup-button" value="Sign up" href="http://new.local/application.php", target="_blank">
           </form>
         </div>
