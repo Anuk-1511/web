@@ -38,25 +38,25 @@
           <div class="custom_select">
             <select>
               <option value="">Select</option>
-              <option value="male">Bsc(H)</option>
-              <option value="female">B.com(H)</option>
+              <option value="course">Bsc(H)</option>
+              <option value="course">B.com(H)</option>
             </select>
           </div>
        </div> 
         <div class="inputfield">
-          <label>Email Address</label>
+          <label></label>
           <input type="text" class="input">
        </div> 
       <div class="inputfield">
-          <label>Phone Number</label>
+          <label></label>
           <input type="text" class="input">
        </div> 
       <div class="inputfield">
-          <label>Address</label>
+          <label>Upload Cv</label>
           <textarea class="textarea"></textarea>
        </div> 
       <div class="inputfield">
-          <label>Postal Code</label>
+          <label></label>
           <input type="text" class="input">
        </div> 
       <div class="inputfield terms">
