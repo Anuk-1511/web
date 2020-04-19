@@ -13,26 +13,69 @@
 <?php include 'navbar.php';?>
 <div class="sign-in-form">
             <img src="pic.png">
-            <form action="index.html" method="POST">
+            <form action="login.php" method="post">
                 <input type ="text" placeholder="User Name" class="txt" name="UserName">
                 <input type ="email" placeholder="Email" class="txt" name="Email">
                 <input type ="password" placeholder="Password" class="txt" name="Password">
-                <form action="index.php">
-                <input type="submit" value="Sign In" class="btn1">
-                </form>
-                <form action="signup.php">
-                <input type="submit" value="Sign Up" class="btn2">
-                </form>
-                
-                <a href="#">Already Have a Account</a>
+                <input type ="password" placeholder="Confirm Password" class="txt" name="Cpass">
+                <input type="submit" name="submit1" value="Sign In" class="btn1">
+                <?php
+      
+      require_once('connection.php');
+
+     if(isset($_POST['submit1']))
+       {
+           $UserName = mysqli_real_escape_string($con,$_POST['UserName']);
+           $Email = mysqli_real_escape_string($con,$_POST['Email']);
+           $Password = mysqli_real_escape_string($con,$_POST['Password']);
+           $CPassword = mysqli_real_escape_string($con,$_POST['Cpass']);
+
+           if(empty($UserName) || empty($Email) || empty($Password) || empty($CPassword))
+           {
+               echo 'Please fill in the Blanks';
+           }
+
+           if($Password!=$CPassword)
+           {
+               echo 'Password Not Matched';
+           }
+           else
+           {
+                $Pass = md5($Password);
+                $sql = "insert into users (UName,Email,Password) values ('$UserName','$Email','$Pass')";
+                $result = mysqli_query($con,$sql);
+
+                if($result)
+                {
+                    echo 'Your record has been saved in the database';
+                }
+
+                else
+                {
+                     
+                    echo 'Please Check your Query';
+
+                }
+           }
+       }
+
+?>
+            
             </form>
+            <form action="signup.php" method="post">
+                <input type="submit" name="submit2" value="Sign Up" class="btn2" name="Sign Up">
+                
+                <?php
+                    require_once('connection.php');
+
+                       if(isset($_POST['submit2']))
+                       {
+                           echo '';
+                       }
+                ?>
+                </form>
         </div>
+        
 <?php include 'scripts.php';?>
 </body>
 </html>
-
-
-<!--- Check out my courses! -->
-<!-- <div class="udemy-course" style="position: fixed; bottom: 0; right: 0; margin-bottom: -5px; z-index: 100;">
-	<a href="https://www.google.com/search?q=shinchan&rlz=1C1CHBF_enIN859IN859&oq=sh&aqs=chrome.0.69i59j69i57j69i59j0l3j69i60j69i61.1407j0j7&sourceid=chrome&ie=UTF-8" target="_blank" style="z-index: 999!important; cursor: pointer!important;"><img src="img/sh.jpg" style="max-width: 100%; min-width: 100%;"></a>
-</div> -->
