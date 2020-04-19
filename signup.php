@@ -6,7 +6,6 @@
 </head>
 <body>
 	<?php include 'navbar.php';?>
-
     <div id="login-box">
       <div class="left-box">
         <h1> Sign Up</h1>
