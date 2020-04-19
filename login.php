@@ -47,7 +47,7 @@
 
                 if($result)
                 {
-                    echo 'Your record has been saved in the database';
+                    echo '';
                 }
 
                 else
