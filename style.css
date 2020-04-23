@@ -5,7 +5,7 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   color: #505962;
   background: url(back.jpg) no-repeat;
-    background-size: cover;
+  background-size: cover;
 }
 
 .carousel-inner img {

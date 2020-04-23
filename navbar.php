@@ -16,9 +16,18 @@
 					<li class="nav-item">
 						<a class="nav-link" href="signup.php">SignUp</a>
 					</li>
+
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="slider.php">Search</a>
+					</li>
 					
 					<li class="nav-item">
 						<a class="nav-link" href="contact-us.php">Contact Us</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="aboutus.php">about Us</a>
 					</li>
 				</ul>
 			</div>
