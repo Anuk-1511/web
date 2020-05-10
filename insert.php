@@ -13,7 +13,6 @@ if($link === false){
         $sql = "INSERT INTO logins (username, password ,email) VALUES ('$username','$password','$email')";
          
         if(mysqli_query($link, $sql)){
-            echo "Records added successfully.";
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
         }
@@ -34,20 +33,23 @@ if($link === false){
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 
 .column {
   float: left;
-  width: 75%;
+  width: 20%;
   padding: 0 10px;
+  margin-left: 20%;
+  margin-right: auto;
 }
 
 
-.row {margin: 10px -5px;
+.row {
    
-  
+  margin-top:10%;
+  margin-bottom:auto;
 }
 
 
@@ -66,14 +68,27 @@ body {
   }
 }
 
+.hbutton {
+    background-color:#487eb0;
+    color: white;
+    border-radius: 20px;
+    padding:4px;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .hbutton:hover {background-color: #3e8e41;}
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
   background-color: #f1f1f1;
-  margin: 0 auto; 
-        float: none;
-        margin-bottom: 10px;
+  
+}
+
+.image img{
+  width: 100%;
+  height: 100%;
 }
 </style>
 </head>
@@ -85,8 +100,11 @@ body {
   <div class="column">
     <div class="card">
       <h3>Are you a Empolyee</h3>
+      <div class="image">
+      <img src="empolyee.jpg">
+      </div>
       <form method=post>
-      <button type="submit" class="hbutton" formaction="application.php"  >Sign Up</button>
+      <button type="submit" class="hbutton" formaction="application.php"  >Continue</button>
       </form>
     </div>
   </div>
@@ -94,7 +112,10 @@ body {
   <div class="column">
     <div class="card">
       <h3>Are you a Empolyer</h3>
-      <button type="submit" class="hbutton"  >Sign Up</button>
+      <div class="image">
+      <img src="empolyer.jpg">
+      </div>
+      <button type="submit" class="hbutton" formaction="" >Continue</button>
     </div>
   </div>
   
