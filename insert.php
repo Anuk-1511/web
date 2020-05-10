@@ -115,7 +115,9 @@ body {
       <div class="image">
       <img src="empolyer.jpg">
       </div>
-      <button type="submit" class="hbutton" formaction="" >Continue</button>
+      <form method=post>
+      <button type="submit" class="hbutton" formaction="empapplication.php" >Continue</button>
+      </form>
     </div>
   </div>
   

@@ -10,44 +10,32 @@
 </head>
 <body>
 
-
-
 <div class="wrapper">
     <div class="title">
-      Educational info
+      Company info
     </div>
     <div class="form">
        <div class="inputfield">
-          <label>class 10th board</label>
+          <label> Company Name</label>
           <input type="text" class="input">
        </div>  
-        <div class="inputfield">
-          <label>class 10th cgpa</label>
-          <input type="text" class="input">
-       </div>  
+       
        <div class="inputfield">
-          <label>class 12th board</label>
-          <input type="text" class="input">
-       </div>  
-      <div class="inputfield">
-          <label>class 12th cgpa</label>
-          <input type="text" class="input">
+          <label>Company Address</label>
+          <textarea class="textarea"></textarea>
        </div> 
-        <div class="inputfield">
-          <label>graduation</label>
+       <div class="inputfield">
+          <label>Company Location</label>
           <div class="custom_select">
             <select>
               <option value="">Select</option>
-              <option value="course">Bsc</option>
-              <option value="course">B.com</option>
-              <option value="course">BA</option>
+              <option value="location">Delhi</option>
+              <option value="location">Mumbai</option>
+              <option value="location">Kolkata</option>
+              <option value="location">Tamil Nadu</option>
             </select>
           </div>
-       </div> 
-       <div class="inputfield">
-          <label>Other Qualifications (if any)</label>
-          <input type="text" class="input">
-       </div> 
+       </div>
       <div class="inputfield terms">
           <label class="check">
             <input type="checkbox">
@@ -56,7 +44,7 @@
           <p>Agreed to terms and conditions</p>
        </div> 
       <div class="inputfield">
-          <form action ="index.php">
+          <form action ="jobdata.php">
         <input type="submit" value="Confirm" class="btn">
          </form>
       </div>

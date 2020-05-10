@@ -9,9 +9,6 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<?php include 'navbar.php';?>
-
 <div class="wrapper">
     <div class="title">
       Registration Form
