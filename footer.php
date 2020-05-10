@@ -13,7 +13,9 @@
 				</div>
 				<div class="col-md-4 pb-5">
 					<h3 class="text-center">CONNECT WITH US</h3><br>
-					<a class="btn btn-outline-light btn-lg" href="#">SEND US AN EMAIL</a>
+					<form>
+					<button type="submit" class="btn btn-outline-light btn-lg" formaction="contact-us.php">SEND US AN EMAIL</button>
+				</form>
 				</div>
 			</div><!--- End of Row -->
 		</div><!--- End of Container -->

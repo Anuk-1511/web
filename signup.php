@@ -1,3 +1,97 @@
+<?php
+
+require_once "config.php";
+ 
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Validate username
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter a username.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE username = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $username_err = "This username is already taken.";
+                } else{
+                    $username = trim($_POST["username"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Validate password
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter a password.";     
+    } elseif(strlen(trim($_POST["password"])) < 6){
+        $password_err = "Password must have atleast 6 characters.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+    
+    // Validate confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = "Please confirm password.";     
+    } else{
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($password_err) && ($password != $confirm_password)){
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+    
+    // Check input errors before inserting in database
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+         
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            
+            // Set parameters
+            $param_username = $username;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                header("location: ch.php");
+                
+            } else{
+                echo "Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Close connection
+    mysqli_close($link);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,16 +103,29 @@
     <div id="login-box">
       <div class="left-box">
         <h1> Sign Up</h1>
+        <form method ="post">
+          <input type="text" name="username" placeholder="Username" required/>
+          <input type="text" id="email" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must look like  email@gmail.com" required/>
+          <input type="password" id="pwd" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>  
+          <input type="password" name="confirm_password" id="cnpwd"placeholder="Retype password" required/> 
+              <button type="submit" class="hbutton"  >Sign Up</button>
+            </form>
           
-          <input type="text" name="username" placeholder="Username"/>
-          <input type="text" name="email" placeholder="Email"/>
-          <input type="password" name="password" placeholder="Password"/>
-        
-          <input type="password" name="password2" placeholder="Retype password"/>
-          <form action="application.php">
-          <input type="submit" name="signup-button" value="Sign up" href="http://new.local/application.php", target="_blank">
-          </form>
         </div>
+        <script type="text/javascript">
+        window.onload = function () {
+            var txtPassword = document.getElementById("pwd");
+            var cnpwd = document.getElementById("cnpwd");
+            txtPassword.onchange = ConfirmPassword;
+            cnpwd.onkeyup = ConfirmPassword;
+            function ConfirmPassword() {
+                cnpwd.setCustomValidity("");
+                if (txtPassword.value != cnpwd.value) {
+                    cnpwd.setCustomValidity("Passwords do not match.");
+                }
+            }
+        }
+    </script>
         <div class="right-box">
           <span class="signinwith">Sign in with<br/>Social Network     </span>
         
@@ -31,12 +138,10 @@
         <div class="or">OR</div>
     </div>
 
+
+
     <?php include 'scripts.php';?>
 </body>
 </html>
 
 
-<!--- Check out my courses! -->
-<!-- <div class="udemy-course" style="position: fixed; bottom: 0; right: 0; margin-bottom: -5px; z-index: 100;">
-	<a href="https://www.google.com/search?q=shinchan&rlz=1C1CHBF_enIN859IN859&oq=sh&aqs=chrome.0.69i59j69i57j69i59j0l3j69i60j69i61.1407j0j7&sourceid=chrome&ie=UTF-8" target="_blank" style="z-index: 999!important; cursor: pointer!important;"><img src="img/sh.jpg" style="max-width: 100%; min-width: 100%;"></a>
-</div> -->

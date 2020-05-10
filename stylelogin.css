@@ -7,7 +7,6 @@ body
     background-size: cover;
 
 }
-
 .sign-in-form
 {
     width: 300px;
@@ -64,19 +63,20 @@ body
     transform:scale(0.96);
 }
 
-.btn2
+#btn
 {  
-    margin-top: 50px 20px;
+    
+    margin-top: 20px 0px;
     border-radius: 20px;
     background: #487eb0;
     color: #fff;
     border-radius: 40px;
     cursor:pointer;
-    transition: 0.7s;
+    transition: 0.8s;
 
 }
 
-.btn2:hover
+#btn:hover
 {
     transform:scale(0.96);
 }
