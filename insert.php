@@ -1,9 +1,8 @@
 <?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
+
 $link = mysqli_connect("localhost", "root", "", "login");
  
-// Check connection
+
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
@@ -34,6 +33,8 @@ if($link === false){
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;
+   background: url(office.jpg) no-repeat;
+   background-size: cover;
 }
 
 
