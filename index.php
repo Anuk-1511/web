@@ -10,8 +10,8 @@
 	<!--- Image Slider -->
 	<div class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
-			<div class="carousel-item active"><img src="back.png"></div>
-			<div class="carousel-item"><img src="b2.jpg"></div>
+			<div class="carousel-item active"><img src="back.png" style="width:100%;height:500px;"></div>
+			<div class="carousel-item"><img src="b2.jpg" style="width:100%;height:500px;"></div>
 			
 		</div>
 	</div>
