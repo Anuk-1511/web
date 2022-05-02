@@ -1,36 +1,946 @@
-/*Write a file program to copy one file into another file. Use exception handling to
-raise and handle exception for source file not found.*/
+DDA LINE DRAWING
+import matlpotlib.pyplot as plt
 
-#include<iostream>
-#include<conio.h>
-#include<fstream>
+print("Enter the value of x1: ")
+x1=int(input())
+print("Enter the value of x2: ")
+x2=int(input())
+print("Enter the value of y1: ")
+y1=int(input())
+print("Enter the value of y2: ")
+y2=int(input())
+
+dx = x2-x1
+dy = y2-y1
+
+if abs(dx)>abs(dy):
+    steps=abs(dx)
+else:
+    steps=abs(dy)
+
+xincrement =  dx/steps
+yincrement = dy/steps
+
+i=0
+
+xcoordinates = []
+ycoordinates = []
+
+
+while i <steps:
+    i +=1
+    x1 = x1 + increment
+    y1 = y1 + increment
+    print("X1: ",x1,"Y1: ",y1)
+    xcoordinates.append(x1)
+    ycoordinates.append(y1)
+
+
+plt.plot(xcoordinates,ycoordinates)
+plt.xlabel('X-Axis')
+plt.ylabel('Y-Axis')
+
+plt.title("DDA Algorithm")
+plt.show()
+
+
+
+BRESHESMAN LINE DRAWING
+import matplotlib.pyplot as plt
+plt.title("Bresenham Algorithm)
+plt.xlabel("X Axis")
+plt.ylabel("Y Axis")
+
+def bres(x1,y1,x2,y2):
+   x,y=x1,y1
+   dx= abs(x2-x1)
+   dy=abs(y2-y1)
+   gradient = dy/float(dx)
+
+   if gradient > 1:
+       dx,dy=dy,dx
+       x,y=y,x
+       x1,y1=y1,x1
+       x2,y2=y2,x2
+
+   p=2 *dy-dx
+   print('x= %s, y=%s' %(x,y))
+   xcoordinates = [x]
+   ycoordinates = [y]
+
+  for k in range(dx):
+     if p>0:
+         y=y+1 if y<y2 else y-1
+         p=p+2*(dy-dx)
+     else:
+         p=p+2*dy
+
+     x = x+1 if x<x2 else x-1
+
+     print('x= %s, y=%s' %(x,y))
+     xcoordinates.append(x)
+     ycoordinates.append(y)
+  
+  plt.plot(xcoordinates,ycoordinates)
+  plt.show()
+
+
+def main():
+  x1 = int(input("Enter the starting point of x:"))
+  y1 = int(input("Enter the starting point of y:"))
+  x2 = int(input("Enter the end point of x: "))
+  y2 = int(input("Enter the end point of y: "))
+
+
+  bres(x1,y1,x2,y2)
+
+
+if __name__ =="__main__":
+  main()
+
+
+
+
+
+MID POINT CIRCLE DRAWING
+# Python3 program for implementing
+# Mid-Point Circle Drawing Algorithm
+
+def midPointCircleDraw(x_centre, y_centre, r):
+	x = r
+	y = 0
+	
+	# Printing the initial point the
+	# axes after translation
+	print("(", x + x_centre, ", ",
+			y + y_centre, ")",
+			sep = "", end = "")
+	
+	# When radius is zero only a single
+	# point be printed
+	if (r > 0) :
+	
+		print("(", x + x_centre, ", ",
+				-y + y_centre, ")",
+				sep = "", end = "")
+		print("(", y + x_centre, ", ",
+				x + y_centre, ")",
+				sep = "", end = "")
+		print("(", -y + x_centre, ", ",
+					x + y_centre, ")", sep = "")
+	
+	# Initialising the value of P
+	P = 1 - r
+
+	while x > y:
+	
+		y += 1
+		
+		# Mid-point inside or on the perimeter
+		if P <= 0:
+			P = P + 2 * y + 1
+			
+		# Mid-point outside the perimeter
+		else:		
+			x -= 1
+			P = P + 2 * y - 2 * x + 1
+		
+		# All the perimeter points have
+		# already been printed
+		if (x < y):
+			break
+		
+		# Printing the generated point its reflection
+		# in the other octants after translation
+		print("(", x + x_centre, ", ", y + y_centre,
+							")", sep = "", end = "")
+		print("(", -x + x_centre, ", ", y + y_centre,
+							")", sep = "", end = "")
+		print("(", x + x_centre, ", ", -y + y_centre,
+							")", sep = "", end = "")
+		print("(", -x + x_centre, ", ", -y + y_centre,
+										")", sep = "")
+		
+		# If the generated point on the line x = y then
+		# the perimeter points have already been printed
+		if x != y:
+		
+			print("(", y + x_centre, ", ", x + y_centre,
+								")", sep = "", end = "")
+			print("(", -y + x_centre, ", ", x + y_centre,
+								")", sep = "", end = "")
+			print("(", y + x_centre, ", ", -x + y_centre,
+								")", sep = "", end = "")
+			print("(", -y + x_centre, ", ", -x + y_centre,
+											")", sep = "")
+							
+# Driver Code
+if __name__ == '__main__':
+	
+	# To draw a circle of radius 3
+	# centered at (0, 0)
+	midPointCircleDraw(0, 0, 3)
+
+
+
+COHEN SUTHERLAND LINE CLIPPING
+RIGHT = 2 # 0010
+BOTTOM = 4 # 0100
+TOP = 8	 # 1000
+
+# Defining x_max, y_max and x_min, y_min for rectangle
+# Since diagonal points are enough to define a rectangle
+x_max = 200
+y_max = 200
+x_min = 50
+y_min = 50
+
+
+# Function to compute region code for a point(x, y)
+def computeCode(x, y):
+	code = INSIDE
+	if x < x_min:	 # to the left of rectangle
+		code |= LEFT
+	elif x > x_max: # to the right of rectangle
+		code |= RIGHT
+	if y < y_min:	 # below the rectangle
+		code |= BOTTOM
+	elif y > y_max: # above the rectangle
+		code |= TOP
+
+	return code
+
+
+# Implementing Cohen-Sutherland algorithm
+# Clipping a line from P1 = (x1, y1) to P2 = (x2, y2)
+def cohenSutherlandClip(x1, y1, x2, y2):
+
+	# Compute region codes for P1, P2
+	code1 = computeCode(x1, y1)
+	code2 = computeCode(x2, y2)
+	accept = False
+
+	while True:
+
+        # If both endpoints lie within rectangle
+		if code1 == 0 and code2 == 0:
+			accept = True
+			break
+
+		# If both endpoints are outside rectangle
+		elif (code1 & code2) != 0:
+			break
+
+		# Some segment lies within the rectangle
+		else:
+
+			# Line Needs clipping
+			# At least one of the points is outside,
+			# select it
+			x = 1.0
+			y = 1.0
+			if code1 != 0:
+				code_out = code1
+			else:
+				code_out = code2
+
+			# Find intersection point
+			# using formulas y = y1 + slope * (x - x1),
+			# x = x1 + (1 / slope) * (y - y1)
+			if code_out & TOP:
+				
+				# point is above the clip rectangle
+				x = x1 + (x2 - x1) * \
+								(y_max - y1) / (y2 - y1)
+				y = y_max
+
+			elif code_out & BOTTOM:
+				
+				# point is below the clip rectangle
+				x = x1 + (x2 - x1) * \
+								(y_min - y1) / (y2 - y1)
+				y = y_min
+
+			elif code_out & RIGHT:
+				
+				# point is to the right of the clip rectangle
+				y = y1 + (y2 - y1) * \
+								(x_max - x1) / (x2 - x1)
+				x = x_max
+
+			elif code_out & LEFT:
+				
+				# point is to the left of the clip rectangle
+				y = y1 + (y2 - y1) * \
+								(x_min - x1) / (x2 - x1)
+				x = x_min
+
+			# Now intersection point x, y is found
+			# We replace point outside clipping rectangle
+			# by intersection point
+			if code_out == code1:
+				x1 = x
+				y1 = y
+				code1 = computeCode(x1, y1)
+
+			else:
+				x2 = x
+				y2 = y
+				code2 = computeCode(x2, y2)
+
+	if accept:
+            print ("Line accepted from %.2f, %.2f to %.2f, %.2f" % (x1, y1, x2, y2))      
+
+		# Here the user can add code to display the rectangle
+		# along with the accepted (portion of) lines
+
+	else:
+		print("Line rejected")
+        
+# Driver Script
+# First Line segment
+cohenSutherlandClip(50, 50, 200,200)
+
+# Second Line segment
+cohenSutherlandClip(7, 9,190, 150)
+
+# Third Line segment
+cohenSutherlandClip(1, 5, 4, 1)
+
+
+SUTHERLAND HODGMAN
+import numpy as np
+import warnings
+
+# POINTS NEED TO BE PRESENTED CLOCKWISE OR ELSE THIS WONT WORK
+
+class PolygonClipper:
+    
+    def __init__(self,warn_if_empty=True):
+        self.warn_if_empty = warn_if_empty
+    
+    def is_inside(self,p1,p2,q):
+        R = (p2[0] - p1[0]) * (q[1] - p1[1]) - (p2[1] - p1[1]) * (q[0] - p1[0])
+        if R <= 0:
+            return True
+        else:
+            return False
+
+    def compute_intersection(self,p1,p2,p3,p4):
+        
+        """
+        given points p1 and p2 on line L1, compute the equation of L1 in the
+        format of y = m1 * x + b1. Also, given points p3 and p4 on line L2,
+        compute the equation of L2 in the format of y = m2 * x + b2.
+        
+        To compute the point of intersection of the two lines, equate
+        the two line equations together
+        
+        m1 * x + b1 = m2 * x + b2
+        
+        and solve for x. Once x is obtained, substitute it into one of the
+        equations to obtain the value of y.
+        
+        if one of the lines is vertical, then the x-coordinate of the point of
+        intersection will be the x-coordinate of the vertical line. Note that
+        there is no need to check if both lines are vertical (parallel), since
+        this function is only called if we know that the lines intersect.
+        """
+        
+        # if first line is vertical
+        if p2[0] - p1[0] == 0:
+            x = p1[0]
+            
+            # slope and intercept of second line
+            m2 = (p4[1] - p3[1]) / (p4[0] - p3[0])
+            b2 = p3[1] - m2 * p3[0]
+            
+            # y-coordinate of intersection
+            y = m2 * x + b2
+        
+        # if second line is vertical
+        elif p4[0] - p3[0] == 0:
+            x = p3[0]
+            
+            # slope and intercept of first line
+            m1 = (p2[1] - p1[1]) / (p2[0] - p1[0])
+            b1 = p1[1] - m1 * p1[0]
+            
+            # y-coordinate of intersection
+            y = m1 * x + b1
+        
+        # if neither line is vertical
+        else:
+            m1 = (p2[1] - p1[1]) / (p2[0] - p1[0])
+            b1 = p1[1] - m1 * p1[0]
+            
+            # slope and intercept of second line
+            m2 = (p4[1] - p3[1]) / (p4[0] - p3[0])
+            b2 = p3[1] - m2 * p3[0]
+        
+            # x-coordinate of intersection
+            x = (b2 - b1) / (m1 - m2)
+        
+            # y-coordinate of intersection
+            y = m1 * x + b1
+        
+        intersection = (x,y)
+        
+        return intersection
+    
+    def clip(self,subject_polygon,clipping_polygon):
+        
+        final_polygon = subject_polygon.copy()
+        
+        for i in range(len(clipping_polygon)):
+            
+            # stores the vertices of the next iteration of the clipping procedure
+            next_polygon = final_polygon.copy()
+            
+            # stores the vertices of the final clipped polygon
+            final_polygon = []
+            
+            # these two vertices define a line segment (edge) in the clipping
+            # polygon. It is assumed that indices wrap around, such that if
+            # i = 1, then i - 1 = K.
+            c_edge_start = clipping_polygon[i - 1]
+            c_edge_end = clipping_polygon[i]
+            
+            for j in range(len(next_polygon)):
+                
+                # these two vertices define a line segment (edge) in the subject
+                # polygon
+                s_edge_start = next_polygon[j - 1]
+                s_edge_end = next_polygon[j]
+                
+                if self.is_inside(c_edge_start,c_edge_end,s_edge_end):
+                    if not self.is_inside(c_edge_start,c_edge_end,s_edge_start):
+                        intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                        final_polygon.append(intersection)
+                    final_polygon.append(tuple(s_edge_end))
+                elif self.is_inside(c_edge_start,c_edge_end,s_edge_start):
+                    intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                    final_polygon.append(intersection)
+        
+        return np.asarray(final_polygon)
+    
+    def __call__(self,A,B):
+        clipped_polygon = self.clip(A,B)
+        if len(clipped_polygon) == 0 and self.warn_if_empty:
+            warnings.warn("No intersections found. Are you sure your \
+                          polygon coordinates are in clockwise order?")
+        
+        return clipped_polygon
+
+if __name__ == '__main__':
+    
+    # some test polygons
+    
+    clip = PolygonClipper()
+    
+    # squares
+    # subject_polygon = [(-1,1),(1,1),(1,-1),(-1,-1)]
+    # clipping_polygon = [(0,0),(0,2),(2,2),(2,0)]
+    
+    # squares: different order of points
+    # subject_polygon = [(-1,-1),(-1,1),(1,1),(1,-1)]
+    # clipping_polygon = [(2,0),(0,0),(0,2),(2,2)]
+    
+    # triangles
+    # subject_polygon = [(0,0),(2,1),(2,0)]
+    # clipping_polygon = [(1,0.5),(3,1.5),(3,0.5)]
+    
+    # star and square
+    subject_polygon = [(0,3),(0.5,0.5),(3,0),(0.5,-0.5),(0,-3),(-0.5,-0.5),(-3,0),(-0.5,0.5)]
+    clipping_polygon = [(-2,-2),(-2,2),(2,2),(2,-2)]
+    
+    # star and triangle
+    # subject_polygon = [(0,3),(0.5,0.5),(3,0),(0.5,-0.5),(0,-3),(-0.5,-0.5),(-3,0),(-0.5,0.5)]
+    # clipping_polygon = [(0,2),(2,-2),(-2,-2)]
+    
+    subject_polygon = np.array(subject_polygon)
+    clipping_polygon = np.array(clipping_polygon)
+    clipped_polygon = clip(subject_polygon,clipping_polygon)
+
+
+
+POLYGON FILLING
+#include <iostream>
+#include <graphics.h>
 using namespace std;
-int main ()
-{
-    fstream a, b;
-    char ch;
-    a.open("log1.txt"); //The file from which the content will be copied
-    try {
-        if (a.fail())
-        {
-            throw 1.7f;
-        }
-        else
-        {
-            b.open("log2.txt", ios::out); //The file to which the content will be copied
-            while (!a.eof())
-            {
-                a.get(ch); //reading from file object 'a'
-                cout << ch;
-                b << ch; //writing to file log2.txt
-            }
-            a.close();
-            b.close();
-        }
-    }
-    catch (float x)
-    {
-        cout << "SOURCE FILE NOT FOUND";
-    }
-    return 0;
+int main(){
+int i,j,n,k,x[20],y[20],ymin=10000,ymax=0,dy,dx,in_x[100],temp;
+float slope[100];
+int window1 = initwindow(800,800);
+cout<<"Enter the number of vertices"<<endl;
+cin>>n;
+cout<<"Enter the coordinates of edges"<<endl;
+for(i=0;i<n;i++){
+cin>>x[i]>>y[i];
+if(y[i]>ymax)
+ ymax=y[i];
+if(y[i]<ymin)
+ ymin=y[i];
 }
+x[n]=x[0];y[n]=y[0];
+for(i=0;i<n;i++)
+ line(x[i],y[i],x[i+1],y[i+1]);
+ delay(4000);
+for(i=0;i<n;i++){
+dy=y[i+1]-y[i];
+dx=x[i+1]-x[i];
+if(dy==0)
+ slope[i]=1.0;
+if(dx==0)
+ slope[i]=0.0;
+if(dy!=0 && dx!=0)
+ slope[i]=(float)dx/dy;
+
+}
+
+for(i=ymin;i<=ymax;i++){
+k=0;
+for(j=0;j<n;j++){
+if((y[j]<=i && y[j+1]>i) || (y[j]>i && y[j+1]<=i)){
+in_x[k]=(int)(x[j]+ slope[j]*(i-y[j]));
+k++;
+}
+}
+for(int m=0;m<k-1;m++){
+ for(int l=0;l<k-1;l++){
+
+ if(in_x[l]>in_x[l+1]){
+ temp=in_x[l];
+ in_x[l]=in_x[l+1];
+ in_x[l+1]=temp;
+ }
+ }
+ }
+
+ setcolor(2);
+ 
+
+2D TRANSFORMATION
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+# Create a grid of points in x-y space 
+xvals = np.linspace(-4, 4, 9)
+yvals = np.linspace(-3, 3, 7)
+xygrid = np.column_stack([[x, y] for x in xvals for y in yvals])
+# Apply linear transform
+a = np.column_stack([[2, 1], [-1, 1]])
+print(a)
+uvgrid = np.dot(a, xygrid)
+# This function assigns a unique color based on position
+def colorizer(x, y):
+    """
+    Map x-y coordinates to a rgb color
+    """
+    r = min(1, 1-y/3)
+    g = min(1, 1+y/3)
+    b = 1/4 + x/16
+    return (r, g, b)
+
+# Map grid coordinates to colors
+colors = list(map(colorizer, xygrid[0], xygrid[1]))
+
+# Plot grid points 
+plt.figure(figsize=(4, 4), facecolor="w")
+plt.scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
+# Set axis limits
+plt.grid(True)
+plt.axis("equal")
+plt.title("Original grid in x-y space")
+
+# Plot transformed grid points
+plt.figure(figsize=(4, 4), facecolor="w")
+plt.scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
+plt.grid(True)
+plt.axis("equal")
+plt.title("Transformed grid in u-v space")
+
+# To animate the transform, we generate a series of intermediates
+# Function to compute all intermediate transforms
+def stepwise_transform(a, points, nsteps=30):
+    '''
+    Generate a series of intermediate transform for the matrix multiplication
+      np.dot(a, points) # matrix multiplication
+    starting with the identity matrix, where
+      a: 2-by-2 matrix
+      points: 2-by-n array of coordinates in x-y space 
+
+    Returns a (nsteps + 1)-by-2-by-n array
+    '''
+    # create empty array of the right size
+    transgrid = np.zeros((nsteps+1,) + np.shape(points))
+    # compute intermediate transforms
+    for j in range(nsteps+1):
+        intermediate = np.eye(2) + j/nsteps*(a - np.eye(2)) 
+        transgrid[j] = np.dot(intermediate, points) # apply intermediate matrix transformation
+    return transgrid
+
+# Apply to x-y grid
+steps = 30
+transform = stepwise_transform(a, xygrid, nsteps=steps)
+
+def make_plots(transarray, color, outdir="png-frames", figuresize=(4,4), figuredpi=150):
+    '''
+    Generate a series of png images showing a linear transformation stepwise
+    '''
+    nsteps = transarray.shape[0]
+    ndigits = len(str(nsteps)) # to determine filename padding
+    maxval = np.abs(transarray.max()) # to set axis limits
+    # create directory if necessary
+    import os
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+    # create figure
+    plt.ioff()
+    fig = plt.figure(figsize=figuresize, facecolor="w")
+    for j in range(nsteps): # plot individual frames
+        plt.cla()
+        plt.scatter(transarray[j,0], transarray[j,1], s=36, c=color, edgecolor="none")
+        plt.xlim(1.1*np.array([-maxval, maxval]))
+        plt.ylim(1.1*np.array([-maxval, maxval]))
+        plt.grid(True)
+        plt.draw()
+        # save as png
+        outfile = os.path.join(outdir, "frame-" + str(j+1).zfill(ndigits) + ".png")
+        fig.savefig(outfile, dpi=figuredpi)
+    plt.ion()
+
+# Generate figures
+make_plots(transform, colors, outdir="tmp")
+
+
+# Convert to gif (works on linux/os-x, requires image-magick)
+from subprocess import call
+call("cd png-frames && convert -delay 10 frame-*.png ../animation.gif", shell=True)
+# Optional: uncomment below clean up png files
+#call("rm -f png-frames/*.png", shell=True)
+
+# Example 2: Rotation
+theta = np.pi/3 # 60 degree clockwise rotation
+a = np.column_stack([[np.cos(theta), np.sin(theta)], [-np.sin(theta), np.cos(theta)]])
+print(a)
+# Generate intermediates
+transform = stepwise_transform(a, xygrid, nsteps=steps)
+make_plots(transform, colors)
+# see above to create gif
+
+# Example 3: Shear
+a = np.column_stack([[1, 0], [2, 1]]) # shear along x-axis
+print(a)
+# Generate intermediates
+transform = stepwise_transform(a, xygrid, nsteps=steps)
+make_plots(transform, colors)
+# see above to create gif
+
+# Example 5: Projection
+a = np.column_stack([[1, 0], [0, 0]])
+print(a)
+# Generate intermediates
+transform = stepwise_transform(a, xygrid, nsteps=steps)
+make_plots(transform, colors)
+# see above to create gif
+
+C++ CODE
+#include <iostream>
+#include <graphics.h>
+#include<cmath>
+using namespace std;
+int main(){
+int tx=2,ty=5;
+int window1 = initwindow(800,800);
+int i,j,k;
+float P[2][3];
+cout<<"Enter the coordinates of line"<<endl;
+for(i=0;i<2;i++){
+for(j=0;j<2;j++)
+ cin>>P[i][j];
+P[i][j]=1;
+}
+line(P[0][0], P[0][1], P[1][0], P[1][1]);
+delay(7000);
+float pp[2][3]={0};
+int ch;
+cout<<"Enter the 2d-transformation"<<endl;
+ cout<<"1.translation \n 2. shearing \n 3.reflection \n 4.rotation \n 5.scaling \n 6.exit"<<endl;
+ cin>>ch;
+ switch(ch){
+ case 1: {
+ cout<<"Enter the translating factor"<<endl;
+ cin>>tx>>ty;
+ int T[3][3] = {{1,0,0},
+ {0,1,0},
+ {tx,ty,1}};
+
+for(i=0;i<2;i++){
+for(j=0;j<3;j++)
+for(k=0;k<3;k++)
+pp[i][j]+=P[i][k]*T[k][j];
+}
+ line(pp[0][0], pp[0][1], pp[1][0], pp[1][1]);
+ system("pause");
+break;
+}
+case 2:{
+int sh;
+char ax;
+cout<<"Enter the shearing axis"<<endl;
+cin>>ax;
+
+
+3D TRANSFORMATION
+#include<iostream>
+#include<graphics.h>
+#include<cmath>
+using namespace std;
+int maxx,maxy,midx,midy;
+int main(){
+int window1 = initwindow(800,800);
+bar3d(270,200,370,300,50,5);
+int ch,i,j,k;
+int pp[4][4];
+cout<<"Select Your Choice for 3d Transformation\n";
+ cout<<"1.Translate\n2.Scale\n3.Rotation along x-axis\n4.shearing\n";
+ cin>>ch;
+ cleardevice();
+ switch(ch){
+ case 1:{
+ int tx,ty;
+ cout<<"Enter the translation factor for x,y axis"<<endl;
+ cin>>tx>>ty;
+ bar3d(270+tx,200+ty,370+tx,300+ty,50,5);
+delay(7000);
+cleardevice();
+outtextxy(10,20,"Parallel projection side view");
+bar3d(0,200+ty,0,300+ty,50,5);
+delay(7000);
+delay(7000);
+break;
+}
+case 2:{
+int sx,sy;
+cout<<"Enter the scaling factor for x,y axis"<<endl;
+ cin>>sx>>sy;
+ bar3d(270*sx,200*sy,370*sx,300*sy,50,5);
+ delay(7000);
+ cleardevice();
+outtextxy(10,20,"Parallel projection side view");
+bar3d(0,200*sy,0,300*sy,50,5);
+delay(7000);
+break;
+}
+case 4:{
+int shx,shy;
+cout<<"Enter the shearing factor for x,y axis"<<endl;
+ cin>>shx>>shy;
+ bar3d(270,200+(shy*270),370,300+(shy*50),50+(270*shx),5);
+ delay(7000);
+break;
+}
+case 3:{
+int ang;
+cout<<"Enter the rotation angle"<<endl;
+ cin>>ang;
+ ang=(ang*3.14)/180;
+ int x1= 200*cos(ang)-50*sin(ang);
+ int y1= 50*cos(ang)+200*sin(ang);
+ int x2=300*cos(ang)-500*sin(ang);
+ int y2= 50*cos(ang)+300*sin(ang);
+ bar3d(x1,y1,x2,y2,50,5);
+ delay(7000);
+break;
+}
+}
+ return 0;
+}
+
+
+HERMITE CURVE
+import math
+def Mod(x, y):
+  if y==0:  return x
+  return x-y*math.floor(x/y)
+
+#Generate a cubic Hermite spline from a key points.
+#Key points: [[t0,x0],[t1,x1],[t2,x2],...].
+class TCubicHermiteSpline:
+  class TKeyPoint:
+    T= 0.0  #Input
+    X= 0.0  #Output
+    M= 0.0  #Gradient
+    def __str__(self):
+      return '['+str(self.T)+', '+str(self.X)+', '+str(self.M)+']'
+
+  class TParam: pass
+
+  def __init__(self):
+    self.idx_prev= 0
+    self.Param= self.TParam()
+
+  def FindIdx(self, t, idx_prev=0):
+    idx= idx_prev
+    if idx>=len(self.KeyPts): idx= len(self.KeyPts)-1
+    while idx+1<len(self.KeyPts) and t>self.KeyPts[idx+1].T:  idx+=1
+    while idx>=0 and t<self.KeyPts[idx].T:  idx-=1
+    return idx
+
+  #Return interpolated value at t
+  def Evaluate(self, t):
+    idx= self.FindIdx(t,self.idx_prev)
+    if abs(t-self.KeyPts[-1].T)<1.0e-6:  idx= len(self.KeyPts)-2
+    if idx<0 or idx>=len(self.KeyPts)-1:
+      print ('WARNING: Given t= %f is out of the key points (index: %i)' % (t,idx))
+      if idx<0:
+        idx= 0
+        t= self.KeyPts[0].T
+      else:
+        idx= len(self.KeyPts)-2
+        t= self.KeyPts[-1].T
+
+    h00= lambda t: t*t*(2.0*t-3.0)+1.0
+    h10= lambda t: t*(t*(t-2.0)+1.0)
+    h01= lambda t: t*t*(-2.0*t+3.0)
+    h11= lambda t: t*t*(t-1.0)
+
+    self.idx_prev= idx
+    p0= self.KeyPts[idx]
+    p1= self.KeyPts[idx+1]
+    tr= (t-p0.T) / (p1.T-p0.T)
+    return h00(tr)*p0.X + h10(tr)*(p1.T-p0.T)*p0.M + h01(tr)*p1.X + h11(tr)*(p1.T-p0.T)*p1.M
+
+  #Compute a phase information (n, tp) for a cyclic spline curve.
+  #n:  n-th occurrence of the base wave
+  #tp: phase (time in the base wave)
+  def PhaseInfo(self, t):
+    t0= self.KeyPts[0].T
+    te= self.KeyPts[-1].T
+    T= te-t0
+    mod= Mod(t-t0,T)
+    tp= t0+mod  #Phase
+    n= (t-t0-mod)/T
+    return n, tp
+
+  #Return interpolated value at t (cyclic version).
+  #pi: Phase information.
+  def EvaluateC(self, t, pi=None):
+    if pi==None:
+      n, tp= self.PhaseInfo(t)
+    else:
+      n, tp= pi
+    return self.Evaluate(tp) + n*(self.KeyPts[-1].X - self.KeyPts[0].X)
+
+  #data= [[t0,x0],[t1,x1],[t2,x2],...]
+  FINITE_DIFF=0  #Tangent method: finite difference method
+  CARDINAL=1  #Tangent method: Cardinal spline (c is used)
+  ZERO= 0  #End tangent: zero
+  GRAD= 1  #End tangent: gradient (m is used)
+  CYCLIC= 2  #End tangent: treating data as cyclic (KeyPts[-1] and KeyPts[0] are considered as an identical point)
+  def Initialize(self, data, tan_method=CARDINAL, end_tan=GRAD, c=0.0, m=1.0):
+    if data != None:
+      self.KeyPts= [self.TKeyPoint() for i in range(len(data))]
+      for idx in range(len(data)):
+        self.KeyPts[idx].T= data[idx][0]
+        self.KeyPts[idx].X= data[idx][1]
+
+    #Store parameters for future use / remind parameters if not given
+    if tan_method==None:  tan_method= self.Param.TanMethod
+    else:                 self.Param.TanMethod= tan_method
+    if end_tan==None:  end_tan= self.Param.EndTan
+    else:              self.Param.EndTan= end_tan
+    if c==None:  c= self.Param.C
+    else:        self.Param.C= c
+    if m==None:  c= self.Param.M
+    else:        self.Param.M= m
+
+    grad= lambda idx1,idx2: (self.KeyPts[idx2].X-self.KeyPts[idx1].X)/(self.KeyPts[idx2].T-self.KeyPts[idx1].T)
+
+    if tan_method == self.FINITE_DIFF:
+      for idx in range(1,len(self.KeyPts)-1):
+        self.KeyPts[idx].M= 0.5*grad(idx,idx+1) + 0.5*grad(idx-1,idx)
+    elif tan_method == self.CARDINAL:
+      for idx in range(1,len(self.KeyPts)-1):
+        self.KeyPts[idx].M= (1.0-c)*grad(idx-1,idx+1)
+
+    if end_tan == self.ZERO:
+      self.KeyPts[0].M= 0.0
+      self.KeyPts[-1].M= 0.0
+    elif end_tan == self.GRAD:
+      self.KeyPts[0].M= m*grad(0,1)
+      self.KeyPts[-1].M= m*grad(-2,-1)
+    elif end_tan == self.CYCLIC:
+      if tan_method == self.FINITE_DIFF:
+        grad_p1= grad(0,1)
+        grad_n1= grad(-2,-1)
+        M= 0.5*grad_p1 + 0.5*grad_n1
+        self.KeyPts[0].M= M
+        self.KeyPts[-1].M= M
+      elif tan_method == self.CARDINAL:
+        T= self.KeyPts[-1].T - self.KeyPts[0].T
+        X= self.KeyPts[-1].X - self.KeyPts[0].X
+        grad_2= (X+self.KeyPts[1].X-self.KeyPts[-2].X)/(T+self.KeyPts[1].T-self.KeyPts[-2].T)
+        M= (1.0-c)*grad_2
+        self.KeyPts[0].M= M
+        self.KeyPts[-1].M= M
+
+  def Update(self):
+    self.Initialize(data=None, tan_method=None, end_tan=None, c=None, m=None)
+
+
+if __name__=="__main__":
+  import matplotlib.pyplot as plot
+  import numpy as np
+  import random
+
+  key_points= [[random.random()*3.0,random.random()*2.0-1.0] for i in range(5)]
+  key_points.sort()
+  plot.plot([p[0] for p in key_points], [p[1] for p in key_points], 'o')
+
+  spline= TCubicHermiteSpline()
+  spline.Initialize(key_points, tan_method=spline.CARDINAL, c=0.0)
+
+  X= []
+  Y= []
+  for t in np.arange(key_points[0][0], key_points[-1][0], 0.001):
+    x= spline.Evaluate(t)
+    X.append(t)
+    Y.append(x)
+
+  plot.plot(X,Y)
+  plot.show()
+
+
+BEZIER CURVE
+import math
+import matplotlib.pyplot as plt
+
+
+print("Enter Points : ")
+
+control_ptx= []
+control_pty= []
+for i in range(1,5):
+    print('For point ',i)
+    control_ptx.append(int(input('Enter x : ')))
+    control_pty.append(int(input('Enter y : ')))
+t=0
+xt=0
+yt=0
+x_array= []
+y_array= []
+while(t<=1):
+    xt =  pow (1-t, 3) * control_ptx[0] + 3 * t * pow (1-t, 2) * control_ptx[1] + 3 * pow (t, 2) * (1-t) * control_ptx[2] + pow (t, 3) * control_ptx[3]
+
+    yt =  pow (1-t, 3) * control_pty[0] + 3 * t * pow (1-t, 2) * control_pty[1] + 3 * pow (t, 2) * (1-t) * control_pty[2] + pow (t, 3) * control_pty[3]
+
+    t+=0.0005
+
+    x_array.append(xt)
+    y_array.append(yt)
+plt.plot(x_array,y_array)
+plt.show()
+
+
